@@ -1,4 +1,5 @@
 from django.urls import path
+from mailinglist.api.v1 import api_views
 from . import views
 
 app_name = 'mailinglist'
@@ -24,4 +25,11 @@ urlpatterns = [
          name='create_message'),
     path('message/<uuid:pk>', views.MessageDetailView.as_view(),
          name='view_message'),
+
+    # for API
+    path('api/v1/mailing_list', api_views.MailingListCreateListView.as_view(),
+         name='api_mailing_list_list'),
+    path('api/v1/mailinglist/<uuid:pk>', api_views.MailingListRetrieveUpdateDestroyView.as_view(),
+         name='api_mailing_list_detail'),
+     path('api/v1/mailinglist/')
 ]
