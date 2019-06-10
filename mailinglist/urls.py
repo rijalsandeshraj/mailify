@@ -31,5 +31,9 @@ urlpatterns = [
          name='api_mailing_list_list'),
     path('api/v1/mailinglist/<uuid:pk>', api_views.MailingListRetrieveUpdateDestroyView.as_view(),
          name='api_mailing_list_detail'),
-     path('api/v1/mailinglist/')
+    path('api/v1/mailinglist/<uuid:mailing_list_pk>/subscribers',
+         api_views.SubscriberListCreateView.as_view(),
+         name='api_subscriber_list'),
+    path('api/v1/subscriber/<uuid:pk>', api_views.SubscriberRetrieveUpdateDestroyView.as_view(),
+         name='api_subscriber_detail'),
 ]

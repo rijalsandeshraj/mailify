@@ -4,7 +4,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from mailinglist.permissions import CanUseMailingList
-from mailinglist.serializers import MailingListSerializer, SubscriberSerializer
+from mailinglist.serializers import MailingListSerializer, SubscriberSerializer, \
+    ReadOnlyEmailSubscriberSerializer
 from mailinglist.models import MailingList, Subscriber
 
 
@@ -50,3 +51,9 @@ class SubscriberListCreateView(generics.ListCreateAPIView):
             }
             data.update(mailing_list)
         return super().get_serializer(*args, **kwargs)
+
+
+class SubscriberRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, CanUseMailingList)
+    serializer_class = ReadOnlyEmailSubscriberSerializer
+    queryset = Subscriber.objects.all()

@@ -31,6 +31,14 @@ class Subscriber(models.Model):
     class Meta:
         unique_together = ['email', 'mailing_list', ]
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        is_new = self.state.adding or force_insert
+        super().save(force_insert=force_insert, force_update=force_update,
+                     using=using, update_fields=update_fields)
+        if is_new and not self.confirmed:
+            self.send_confirmation_email()
+
 
 class Message(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
