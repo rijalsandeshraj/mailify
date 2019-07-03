@@ -137,6 +137,10 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+LOGIN_URL = 'user:login'
+LOGIN_REDIRECT_URL = 'mailinglist:mailinglist_list'
+LOGOUT_REDIRECT_URL = 'user:login'
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',

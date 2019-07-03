@@ -15,8 +15,7 @@ class MailingList(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('mailinglist:manage.mailinglist',
-                       kwargs={'pk': self.id})
+        return reverse('mailinglist:mailinglist_list')
 
     def user_can_use_mailing_list(self, user):
         return user == self.owner
